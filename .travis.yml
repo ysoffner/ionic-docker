@@ -10,7 +10,7 @@ matrix:
       - VERSION=1.0.0
 
 before_script:
-  - docker run --rm ysoffner/ionic-docker:$VERSION-$TRAVIS_BRANCH
+  - docker run --rm ysoffner/ionic-docker:$VERSION
 
 script:
   - docker run -ti --rm -p 8100:8100 -p 35729:35729 ysoffner/ionic-docker:$VERSION /bin/sh -c "ionic -v"
