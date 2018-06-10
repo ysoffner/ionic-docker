@@ -11,4 +11,18 @@ matrix:
 
 before_script:
   - docker build -t ysoffner/ionic-docker .
+
+script:
   - docker run -ti --rm -p 8100:8100 -p 35729:35729 ysoffner/ionic-docker /bin/sh -c "ionic -v"
+
+after_success:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+  - docker push ysoffner/ionic-docker:$VERSION-$TRAVIS_BRANCH;
+  - if [[ $TRAVIS_TAG ]]; then
+    docker tag ysoffner/ionic-docker:$VERSION-$TRAVIS_BRANCH ysoffner/ionic-docker:$VERSION;
+    docker push ysoffner/ionic-docker:$VERSION;
+    fi
+  - if [[ $TRAVIS_TAG ]] && [[ $IS_LATEST == 1 ]]; then
+    docker tag ysoffner/ionic-docker:$VERSION ysoffner/ionic-docker:latest;
+    docker push ysoffner/ionic-docker:latest;
+    fi
