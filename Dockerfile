@@ -3,7 +3,7 @@ LABEL maintainer="Yuri Soffner <ysoffner@gmail.com>"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     ANDROID_HOME=/opt/android-sdk-linux \
-    NODE_VERSION=10.4.0 \
+    NODE_VERSION=8.11.2 \
     NPM_VERSION=6.1.0 \
     IONIC_VERSION=3.20.0 \
     CORDOVA_VERSION=8.0.0 \
