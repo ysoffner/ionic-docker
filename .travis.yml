@@ -8,9 +8,11 @@ matrix:
   include:
     - env:
       - VERSION=1.0.0
+      - IS_LATEST=1
 
 before_script:
   - docker build -t ysoffner/ionic-docker .
+  - docker tag ysoffner/ionic-docker ysoffner/ionic-docker:$VERSION-$TRAVIS_BRANCH
 
 script:
   - docker run -ti --rm -p 8100:8100 -p 35729:35729 ysoffner/ionic-docker /bin/sh -c "ionic -v"
